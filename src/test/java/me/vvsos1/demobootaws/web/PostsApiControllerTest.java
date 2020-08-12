@@ -108,4 +108,34 @@ public class PostsApiControllerTest {
                 .isEqualTo(expectedContent);
 
     }
+
+    @Test
+    public void Posts_delete() {
+        //given
+        String title = "title";
+        String content = "content";
+        String author = "author";
+
+        Posts posts = postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .author(author)
+                .build());
+
+        Long id = posts.getId();
+
+        String url = "/api/v1/posts/"+id;
+
+        //when
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, null, Long.class);
+
+        //then
+        assertThat(responseEntity.getStatusCode())
+                .isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody())
+                .isEqualTo(id);
+
+        List<Posts> all = postsRepository.findAll();
+        assertThat(all).isEmpty();
+    }
 }
