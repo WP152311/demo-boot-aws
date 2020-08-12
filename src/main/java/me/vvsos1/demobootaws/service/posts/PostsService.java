@@ -3,11 +3,15 @@ package me.vvsos1.demobootaws.service.posts;
 import lombok.RequiredArgsConstructor;
 import me.vvsos1.demobootaws.domain.posts.Posts;
 import me.vvsos1.demobootaws.domain.posts.PostsRepository;
+import me.vvsos1.demobootaws.web.dto.PostsListResponseDto;
 import me.vvsos1.demobootaws.web.dto.PostsResponseDto;
 import me.vvsos1.demobootaws.web.dto.PostsSaveRequestDto;
 import me.vvsos1.demobootaws.web.dto.PostsUpdateRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -34,5 +38,13 @@ public class PostsService {
                 .orElseThrow(()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
 
         return new PostsResponseDto(posts);
+    }
+
+    @Transactional(readOnly = true) // readOnly를 사용하면 트랜젝션 범위는 유지하되 조회 기능만 남겨두어서 성능 향상
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc()
+                .stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
