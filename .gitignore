@@ -32,6 +32,10 @@ out/
 
 ### VS Code ###
 .vscode/
+setting.json
+
+### log file ##
+*.log
 
 ### OAuth2 Google id, secret ###
 application-oauth.properties
