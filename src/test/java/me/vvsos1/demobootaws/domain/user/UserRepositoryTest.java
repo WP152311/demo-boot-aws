@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @EnableJpaAuditing
-@PropertySource("classpath:application.properties")
 public class UserRepositoryTest {
 
     @Autowired
