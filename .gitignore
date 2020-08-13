@@ -40,3 +40,6 @@ application-oauth.properties
 aws-ssh
 demo-boot-aws.pem
 demo-boot-aws.ppk
+
+### AWS RDS Configuration ###
+application-real-db.properties
