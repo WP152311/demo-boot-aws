@@ -1,6 +1,9 @@
 package me.vvsos1.demobootaws.web;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import me.vvsos1.demobootaws.config.auth.LoginUser;
+import me.vvsos1.demobootaws.config.auth.dto.SessionUser;
 import me.vvsos1.demobootaws.service.posts.PostsService;
 import me.vvsos1.demobootaws.web.dto.PostsResponseDto;
 import org.springframework.stereotype.Controller;
@@ -8,15 +11,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts",postsService.findAllDesc());
+
+
+        if(user != null) {
+            model.addAttribute("name", user.getName());
+        }
+
         return "index";
     }
 

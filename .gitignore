@@ -35,3 +35,8 @@ out/
 
 ### OAuth2 Google id, secret ###
 application-oauth.properties
+
+### AWS SSH pem key ####
+aws-ssh
+demo-boot-aws.pem
+demo-boot-aws.ppk
