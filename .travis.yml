@@ -14,11 +14,30 @@ cache:
 
 script: "./gradlew clean build"
 
-before_install:
+before_install: # gradlew 실행 권한 부여
   - chmod +x gradlew
+
+before_deploy:
+  - zip -r demo-boot-aws
+  - mkdir -p deploy
+  - mv demo-boot-aws.zip deploy/demo-boot-aws.zip
+
+
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY # Travis repo settiongs에 설정된 값
+  secret_access_key: $AWS_SECRET_KEY # Travis repo settiongs에 설정된 값
+  bucket: demo-boot-aws-build
+  region: ap-northeast-2
+  skip_cleanup: true
+  acl: private # zip 파일 접근을 private으로
+  local_dir: deploy # before_deploy에서 생성한 디렉토리
+  wait-until-deployed: true
 
 # CI 실행 완료 시 메일로 알람
 notifications:
   email:
     recipients:
       - vvsos1@hotmail.co.kr
+
+
