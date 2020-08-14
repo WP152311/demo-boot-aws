@@ -36,7 +36,7 @@ echo "> $JAR_NAME 실행"
 
 PROPDIR=/home/ec2-user/app
 
-nohup $JDK_HOME/bin/java -jar \
+nohup /home/ec2-user/jdk-14.0.1/bin/java -jar \
 -Dspring.config.location=$PROPDIR/application-oauth.properties,$PROPDIR/application-real-db.properties \
 -Dspring.profiles.active=real \
  $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
