@@ -24,15 +24,32 @@ before_deploy:
 
 
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY # Travis repo settiongs에 설정된 값
-  secret_access_key: $AWS_SECRET_KEY # Travis repo settiongs에 설정된 값
-  bucket: demo-boot-aws-build
-  region: ap-northeast-2
-  skip_cleanup: true
-  acl: private # zip 파일 접근을 private으로
-  local_dir: deploy # before_deploy에서 생성한 디렉토리
-  wait-until-deployed: true
+  -provider: s3
+   access_key_id: $AWS_ACCESS_KEY # Travis repo settiongs에 설정된 값
+   secret_access_key: $AWS_SECRET_KEY # Travis repo settiongs에 설정된 값
+   bucket: demo-boot-aws-build
+   region: ap-northeast-2
+   skip_cleanup: true
+   acl: private # zip 파일 접근을 private으로
+   local_dir: deploy # before_deploy에서 생성한 디렉토리
+   wait-until-deployed: true
+
+  -provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settiongs에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settiongs에 설정된 값
+
+    bucket: demo-boot-aws-build
+    key: demo-boot-aws.zip
+
+    bundle_type: zip #압축 확장자
+
+    application: demo-boot-aws
+
+    deployment_group: demo-boot-aws-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+
+
 
 # CI 실행 완료 시 메일로 알람
 notifications:
