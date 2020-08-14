@@ -15,7 +15,7 @@ function find_idle_profile()
     CURRENT_PROFILE=$(curl -s http:localhost/profile)
   fi
 
-  if [ "$CURRENT_PROFILE" == "real1" ]
+  if [ "real1" == "$CURRENT_PROFILE"]
   then
     IDLE_PROFILE=real2
   else
@@ -30,7 +30,7 @@ function find_idle_port()
 {
     IDLE_PROFILE=$(find_idle_profile)
 
-    if [ "$IDLE_PROFILE" == "real1"]
+    if [ "real1" == "$IDLE_PROFILE"]
     then
       echo "8081"
     else

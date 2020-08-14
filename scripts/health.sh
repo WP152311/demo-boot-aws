@@ -26,7 +26,7 @@ for RETRY_COUNT in {1..10}; do
     echo "> Health check: ${RESPONSE}"
   fi
 
-  if [ "$RETRY_COUNT" == "10" ]
+  if [ "10" == "${RETRY_COUNT}" ]
   then
     echo "> Health check 실패"
     echo "> 엔진엑스에 연결하지 않고 배포를 종료합니다."
