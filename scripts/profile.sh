@@ -8,14 +8,14 @@ function find_idle_profile()
   # 응답값을 HttpStatus로 받음
   RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
 
-  if [ 400 -le ${RESPONSE_CODE} ] # 400 이상이면; 4xx/5xx 에러 모두 포함
+  if [ ${RESPONSE_CODE} -ge 400 ] # 400 이상이면; 4xx/5xx 에러 모두 포함
   then
     CURRENT_PROFILE=real2 # 현재 엔진엑스가 바라보는 스프링 부트가 에러이면 항상 real2 프로필 사용
   else
     CURRENT_PROFILE=$(curl -s http:localhost/profile)
   fi
 
-  if [ "real1" == "$CURRENT_PROFILE"]
+  if [ ${CURRENT_PROFILE} == real1 ]
   then
     IDLE_PROFILE=real2
   else
@@ -30,7 +30,7 @@ function find_idle_port()
 {
     IDLE_PROFILE=$(find_idle_profile)
 
-    if [ "real1" == "$IDLE_PROFILE"]
+    if [ ${IDLE_PROFILE} == real1 ]
     then
       echo "8081"
     else
