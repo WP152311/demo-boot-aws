@@ -18,9 +18,7 @@ before_install: # gradlew 실행 권한 부여
   - chmod +x gradlew
 
 before_deploy:
-  - pwd
-  - ls
-  - zip -r demo-boot-aws
+  - zip -r demo-boot-aws *
   - mkdir -p deploy
   - mv demo-boot-aws.zip deploy/demo-boot-aws.zip
 
