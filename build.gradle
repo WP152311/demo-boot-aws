@@ -1,3 +1,5 @@
+import java.time.LocalDateTime
+
 plugins {
     id 'org.springframework.boot' version '2.3.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
@@ -5,7 +7,7 @@ plugins {
 }
 
 group = 'me.vvsos1'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.1-SNAPSHOT-'+ LocalDateTime.now().format("yyyyMMddHHmmss")
 sourceCompatibility = '14'
 
 configurations {
