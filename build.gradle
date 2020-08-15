@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'me.vvsos1'
-version = '1.0.1-SNAPSHOT-'+ LocalDateTime.now().format("yyyyMMddHHmmss")
+version = '1.0.1-SNAPSHOT-'+ new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = '14'
 
 configurations {

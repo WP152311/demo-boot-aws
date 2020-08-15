@@ -12,7 +12,7 @@ function find_idle_profile()
   then
     CURRENT_PROFILE=real2 # 현재 엔진엑스가 바라보는 스프링 부트가 에러이면 항상 real2 프로필 사용
   else
-    CURRENT_PROFILE=$(curl -s http:localhost/profile)
+    CURRENT_PROFILE=$(curl -s http://localhost/profile)
   fi
 
   if [ ${CURRENT_PROFILE} == real1 ]
