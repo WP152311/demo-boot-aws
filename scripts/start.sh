@@ -24,13 +24,15 @@ chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
-IDLE_PROFILE=$(find_idle_profile)
+
+IDLE_PORT=$(find_idle_port)
 
 PROP_DIR=/home/ec2-user/app
 
-echo "> $JAR_NAME 를 profile=$IDLE_PROFILE 로 실행합니다."
+echo "> $JAR_NAME 를 server.port=$IDLE_PORT 로 실행합니다."
 
 nohup /home/ec2-user/jdk-14.0.1/bin/java -jar \
--Dspring.config.location=$PROP_DIR/application-oauth.properties,$PROP_DIR/application-real-db.properties,classpath:/application-real1.properties,classpath:application-real2.properties \
--Dspring.profiles.active=$IDLE_PROFILE \
+-Dspring.config.location=$PROP_DIR/application-oauth.properties,$PROP_DIR/application-real-db.properties \
+-Dspring.profiles.active=real \
+-Dserver.port=$IDLE_PORT \
  $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
